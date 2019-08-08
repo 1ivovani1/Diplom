@@ -11,6 +11,7 @@ elementClosest(window);
 import consultationFooter from './modules/consultation-footer';
 import sendingData from './modules/sendingDataFunc';
 import checkList from './modules/checklist';
+import discountPopup from './modules/discount-popup';
 
 //получаем вопрос от пользователя
 consultationFooter();
@@ -20,3 +21,6 @@ checkList();
 
 //ajax
 sendingData();
+
+//скидочная модалка
+discountPopup();
