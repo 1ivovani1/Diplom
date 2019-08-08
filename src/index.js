@@ -13,6 +13,7 @@ import sendingData from './modules/sendingDataFunc';
 import checkList from './modules/checklist';
 import discountPopup from './modules/discount-popup';
 import moreThings from './modules/more-things';
+import accordion from './modules/question-accordeon';
 
 //получаем вопрос от пользователя
 consultationFooter();
@@ -28,3 +29,6 @@ discountPopup();
 
 //более блоков
 moreThings();
+
+//аккордион
+accordion();
