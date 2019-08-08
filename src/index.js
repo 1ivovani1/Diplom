@@ -14,6 +14,8 @@ import checkList from './modules/checklist';
 import discountPopup from './modules/discount-popup';
 import moreThings from './modules/more-things';
 import accordion from './modules/question-accordeon';
+import headerFooterModal from './modules/header-footer';
+import inputValid from './modules/inputs-validate';
 
 //получаем вопрос от пользователя
 consultationFooter();
@@ -32,3 +34,9 @@ moreThings();
 
 //аккордион
 accordion();
+
+//модальные окна header-footer
+headerFooterModal();
+
+//валидация инпутов
+inputValid();

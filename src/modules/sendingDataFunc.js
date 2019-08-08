@@ -31,6 +31,7 @@ const sendingData = () => {
        if (response.status !== 200) {
          throw new Error("I can't connect to the server...")
        }
+       console.log('OK');
        statusMessage.innerHTML = successMessage;
        inputs.forEach(item => item.value = '');
      })
