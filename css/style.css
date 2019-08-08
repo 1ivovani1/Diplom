@@ -22,8 +22,10 @@
   font-style: normal
 }
 
-.success-message{
-  margin-bottom: 20px;
+.success-message-in-form{
+  margin: 0 auto;
+  font-size:2rem;
+  color:black;
 }
 
 html {

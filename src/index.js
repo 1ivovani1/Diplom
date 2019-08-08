@@ -9,8 +9,14 @@ import elementClosest from 'element-closest';
 elementClosest(window);
 
 import consultationFooter from './modules/consultation-footer';
-
-
+import sendingData from './modules/sendingDataFunc';
+import checkList from './modules/checklist';
 
 //получаем вопрос от пользователя
 consultationFooter();
+
+//делаем чеклист
+checkList();
+
+//ajax
+sendingData();
