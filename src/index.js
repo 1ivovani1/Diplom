@@ -12,6 +12,7 @@ import consultationFooter from './modules/consultation-footer';
 import sendingData from './modules/sendingDataFunc';
 import checkList from './modules/checklist';
 import discountPopup from './modules/discount-popup';
+import moreThings from './modules/more-things';
 
 //получаем вопрос от пользователя
 consultationFooter();
@@ -24,3 +25,6 @@ sendingData();
 
 //скидочная модалка
 discountPopup();
+
+//более блоков
+moreThings();
