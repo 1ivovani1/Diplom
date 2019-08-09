@@ -15,6 +15,13 @@ checkboxes.forEach(item => {
     });
 });
 
+const checkMess = () => {
+  const sucessMess = document.querySelector('.success-message-in-form');
+  if (sucessMess) {
+    sucessMess.parentNode.removeChild(sucessMess);
+  }
+}
+
 allConstructBtns.forEach(item => {
   item.addEventListener('click', (e)=> {
     e.preventDefault();
@@ -27,6 +34,20 @@ allConstructBtns.forEach(item => {
         allBodies[index + 1].style.display = 'block';
         calcCount.type();
       }else{
+        const popup = document.querySelector('.popup-discount');
+        popup.style.display = 'block';
+
+        popup.addEventListener('click',(e) => {
+          let target = e.target;
+          if(target.matches('.popup-close')){
+              popup.style.display = 'none';
+              checkMess();
+          }else if (target.matches(".popup-discount:not(.popup-content)")) {
+              popup.style.display = 'none';
+              checkMess();
+          }
+        });
+
         allBodies[0].style.display = 'block';
         allBodies[allBodies.length - 1].style.display = 'none';
         calcCount.start();
