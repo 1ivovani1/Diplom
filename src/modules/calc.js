@@ -3,6 +3,18 @@ const calc = () => {
         allBodies = Array.from(wrapper.querySelectorAll('.panel-collapse')),
         allConstructBtns = Array.from(wrapper.querySelectorAll('.construct-btn'));
 
+const checkboxes = document.querySelectorAll('.onoffswitch-checkbox');
+
+checkboxes.forEach(item => {
+    item.addEventListener('click',() => {
+      if (item.hasAttribute('checked')) {
+        item.removeAttribute('checked');
+      }else{
+        item.setAttribute('checked','');
+      }
+    });
+});
+
 allConstructBtns.forEach(item => {
   item.addEventListener('click', (e)=> {
     e.preventDefault();
@@ -11,9 +23,12 @@ allConstructBtns.forEach(item => {
     if (target.matches('.construct-btn,.construct-btn span')) {
       const index = allConstructBtns.indexOf(target.closest('.construct-btn'));
       if (index + 1 !== allBodies.length) {
+        allBodies[index].style.display = 'none'
         allBodies[index + 1].style.display = 'block';
         calcCount.type();
       }else{
+        allBodies[0].style.display = 'block';
+        allBodies[allBodies.length - 1].style.display = 'none';
         calcCount.start();
         calcCount.eventsListener();
 
@@ -23,8 +38,8 @@ allConstructBtns.forEach(item => {
 
 });
 
- const toiletType = wrapper.querySelector('#myonoffswitch'),
-       allTitles = Array.from(wrapper.querySelectorAll('.title-text')),
+
+ const allTitles = Array.from(wrapper.querySelectorAll('.title-text')),
        allSelects = Array.from(wrapper.querySelectorAll('.select-box'));
        let one = true;
 
@@ -37,6 +52,7 @@ allConstructBtns.forEach(item => {
              this.showResult();
            },
            type(){
+             const toiletType = wrapper.querySelector('#myonoffswitch');
              if (toiletType.hasAttribute('checked')) {
                this.totalPrice = 0;
                this.totalPrice += 10000;
@@ -53,18 +69,18 @@ allConstructBtns.forEach(item => {
              allSelects[2].style.display = 'none';
              allSelects[3].style.display = 'none';
 
-             allTitles[0].style.display = 'inline-block';
-             allSelects[0].style.display = 'inline-block';
-             allSelects[1].style.display = 'inline-block';
+             allTitles[0].style.display = 'block';
+             allSelects[0].style.display = 'block';
+             allSelects[1].style.display = 'block';
            },
            show2Calc(){
              allTitles[0].style.display = 'none';
              allSelects[0].style.display = 'none';
              allSelects[1].style.display = 'none';
 
-             allTitles[1].style.display = 'inline-block';
-             allSelects[2].style.display = 'inline-block';
-             allSelects[3].style.display = 'inline-block';
+             allTitles[1].style.display = 'block';
+             allSelects[2].style.display = 'block';
+             allSelects[3].style.display = 'block';
            },
            selectSum(){
              const activeSelects = wrapper.querySelectorAll('select');
@@ -98,10 +114,9 @@ allConstructBtns.forEach(item => {
            },
            eventsListener(){
              const constWrapper = document.querySelector('#construct');
-             constWrapper.addEventListener('change',() => {
-               this.start();
-               console.log('LOL');
-             });
+             constWrapper.addEventListener('change',() => this.start());
+
+
 
            }
 
