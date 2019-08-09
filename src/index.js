@@ -16,6 +16,7 @@ import moreThings from './modules/more-things';
 import accordion from './modules/question-accordeon';
 import headerFooterModal from './modules/header-footer';
 import inputValid from './modules/inputs-validate';
+import calc from './modules/calc';
 
 //получаем вопрос от пользователя
 consultationFooter();
@@ -40,3 +41,6 @@ headerFooterModal();
 
 //валидация инпутов
 inputValid();
+
+//калькулятор
+calc();

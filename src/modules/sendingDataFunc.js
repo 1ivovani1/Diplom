@@ -21,7 +21,7 @@ const sendingData = () => {
        body[key] = val;
      })
      const question = document.querySelector('input[name="user_quest"]');
-     if (question) {
+     if (question.value) {
        body['question'] = question.value;
        question.value = ''
      }
