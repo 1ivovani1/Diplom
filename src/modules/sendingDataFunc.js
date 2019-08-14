@@ -1,3 +1,5 @@
+import calcCount from './calc'
+
 const sendingData = () => {
   const errorMessage = 'Упс... Что-то пошло не так!',
        loadMessage = 'Загрузка...',
@@ -9,7 +11,7 @@ const sendingData = () => {
        statusMessage.classList.add('success-message-in-form');
 
 
- form.forEach(item => {
+ form.forEach((item,i) => {
    const inputs = item.querySelectorAll('input');
    item.addEventListener('submit',(e) => {
      e.preventDefault();
@@ -22,7 +24,7 @@ const sendingData = () => {
      })
      const question = document.querySelector('input[name="user_quest"]');
      if (question.value) {
-       body['question'] = question.value;
+       formdata['question'] = question.value;
        question.value = ''
      }
 

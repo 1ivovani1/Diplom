@@ -66,9 +66,7 @@ allConstructBtns.forEach(item => {
 
          const calcCount = {
            totalPrice:0,
-           objValues:{
-
-           },
+           objValues:{},
            start(){
              this.type();
              this.selectSum();
@@ -171,17 +169,21 @@ allConstructBtns.forEach(item => {
            eventsListener(){
              const constWrapper = document.querySelector('#construct');
              constWrapper.addEventListener('change',() => this.start());
-             const submitBtn = document.getElementById('submCalc');
-             submitBtn.addEventListener('click',() => {
-               postData(this.objValues)
-               .then((response)=>{
-                 if (response.status !== 200) {
-                   throw new Error("I can't connect to the server...")
-                 }
-                 console.warn('OK');
-               })
-               .catch(error => console.error(error))
-             })
+             const submitBtn = document.querySelector('#discount-popup');
+
+             submitBtn.addEventListener('click',(e) => {
+              let target = e.target;
+              if (target.matches('#discount-popup button')) {
+                postData(this.objValues)
+                 .then(response => {
+                   if (response.status !== 200) {
+                     throw new Error("I can't connect to the server...")
+                   }
+                   console.warn('OK');
+                 })
+                 .catch(error => console.error(error))
+              }
+            })
            }
 
          }
