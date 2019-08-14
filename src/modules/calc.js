@@ -66,19 +66,28 @@ allConstructBtns.forEach(item => {
 
          const calcCount = {
            totalPrice:0,
+           objValues:{
+
+           },
            start(){
              this.type();
              this.selectSum();
+             this.checkNumbers();
+             this.countRing();
              this.checkingDown();
              this.showResult();
            },
            type(){
              const toiletType = wrapper.querySelector('#myonoffswitch');
              if (toiletType.hasAttribute('checked')) {
+               this.objValues.type = 'Однокамерный'
+               this.objValues.downRow = 'Приемный'
                this.totalPrice = 0;
                this.totalPrice += 10000;
                this.show1Calc();
             }else{
+               this.objValues.type = "Двукамерный"
+               this.objValues.downRow = 'Дренажный'
                this.totalPrice = 0;
                this.totalPrice += 15000;
                one = false;
@@ -107,42 +116,85 @@ allConstructBtns.forEach(item => {
              const activeSelects = wrapper.querySelectorAll('select');
              let some = 0;
              activeSelects.forEach((item,i) => {
-               const index = item.options.selectedIndex;
+               let index = item.options.selectedIndex;
                if (i === 0 && index !== 0) {
                     some += this.totalPrice * 0.2;
-               }
-               if (i === 1 && index === 1) {
+              }
+               if (i === 1 && index === 1 || index === 3) {
                  some += this.totalPrice * 0.2;
-               }else if (i === 1 && index === 2) {
+              }else if (i === 1 && index === 2) {
                  some += this.totalPrice * 0.5;
-               }
+              }
              })
              this.totalPrice += some;
+           },
+           checkNumbers(){
+             const allselects = document.querySelectorAll('.diametre');
+             allselects.forEach((item,i) => {
+               item.addEventListener('change',() => {
+                 const index = item.options.selectedIndex;
+                 this.objValues.number = item.options[index].value;
+               })
+            })
+           },
+           countRing(){
+             const allselects = document.querySelectorAll('.rings');
+             allselects.forEach((item,i) => {
+               item.addEventListener('change',() => {
+                 const index = item.options.selectedIndex;
+                 this.objValues.rings = item.options[index].value;
+               })
+            })
            },
            checkingDown(){
              const checkbox = document.querySelector('#myonoffswitch-two');
              if (one && checkbox.hasAttribute('checked')) {
                this.totalPrice += 1000;
+               this.objValues.isBottom = true;
+               return
              }else if(!one && checkbox.hasAttribute('checked')){
                this.totalPrice+= 2000;
+               this.objValues.isBottom = true;
+               return
              }
-             console.log(this.totalPrice);
+             this.objValues.isBottom = false;
 
            },
            showResult(){
              const result = document.querySelector('#calc-result');
+             const lastRes = document.querySelector("#length");
+             this.objValues.homeDistance = lastRes.value;
              result.value = this.totalPrice;
+             this.objValues.endCost = this.totalPrice;
+
            },
            eventsListener(){
              const constWrapper = document.querySelector('#construct');
              constWrapper.addEventListener('change',() => this.start());
-
-
-
+             const submitBtn = document.getElementById('submCalc');
+             submitBtn.addEventListener('click',() => {
+               postData(this.objValues)
+               .then((response)=>{
+                 if (response.status !== 200) {
+                   throw new Error("I can't connect to the server...")
+                 }
+                 console.warn('OK');
+               })
+               .catch(error => console.error(error))
+             })
            }
 
          }
-
-
+         const postData = (body) => {
+           return fetch('./server.php',{
+             method:'POST',
+             headers:{
+               'Content-Type':'application/JSON'
+             },
+             body:JSON.stringify(body)
+           })
+         }
+calcCount.eventsListener();
+calcCount.start();
 }
 export default calc;

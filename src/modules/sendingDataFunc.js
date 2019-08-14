@@ -21,14 +21,11 @@ const sendingData = () => {
        body[key] = val;
      })
      const question = document.querySelector('input[name="user_quest"]');
-     const calcRes = document.getElementById('calc-result');
      if (question.value) {
        body['question'] = question.value;
        question.value = ''
      }
-     if (calcRes.value) {
-       body['calcRes'] = calcRes.value;
-     }
+
 
      postData(body)
      .then((response)=>{
