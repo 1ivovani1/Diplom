@@ -114,15 +114,33 @@ allConstructBtns.forEach(item => {
              const activeSelects = wrapper.querySelectorAll('select');
              let some = 0;
              activeSelects.forEach((item,i) => {
-               let index = item.options.selectedIndex;
-               if (i === 0 && index !== 0) {
-                    some += this.totalPrice * 0.2;
-              }
-               if (i === 1 && index === 1 || index === 3) {
-                 some += this.totalPrice * 0.2;
-              }else if (i === 1 && index === 2) {
-                 some += this.totalPrice * 0.5;
-              }
+               if (i === 0 || i === 2) {
+                 let index = item.options.selectedIndex;
+                 if (index !== 0) {
+                   some+= this.totalPrice *0.2
+                 }
+               }else{
+                 let index = item.options.selectedIndex;
+                 if (index === 1) {
+                   some+= this.totalPrice *0.3
+                 }else if (index===2) {
+                   some+= this.totalPrice *0.5
+                 }
+               }
+
+              //  let index = item.options.selectedIndex;
+              //  if (i === 0 && index !== 0) {
+              //       some += this.totalPrice * 0.2;
+              // }else if (index !== 0) {
+              //     some+= this.totalPrice * 0.5
+              // }
+              //  if (i === 1 && index === 1) {
+              //    some += this.totalPrice * 0.2;
+              // }else if (i === 2 && index === 2) {
+              //    some += this.totalPrice * 0.5;
+              // }else if(i == 1){
+              //   some += this.totalPrice * 0.2;
+              // }
              })
              this.totalPrice += some;
            },
